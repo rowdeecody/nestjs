@@ -1,0 +1,42 @@
+@BASE_URL = http://localhost:3000
+
+### Get root endpoint
+GET {{BASE_URL}}/
+Accept: application/json
+
+### Get all users
+@role = 
+GET {{BASE_URL}}/users?role={{role}}
+Accept: application/json
+
+### Get user by ID
+@GET_ID = 6
+GET {{BASE_URL}}/users/{{GET_ID}}
+Accept: application/json
+
+### Create a new user
+POST {{BASE_URL}}/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Rudy Nuyad Cana",
+  "email": "rudy.cana@gmail.com",
+  "role": "ADMIN"
+}
+
+### Update user by ID
+@UPDATE_ID = 6
+PATCH {{BASE_URL}}/users/{{UPDATE_ID}}
+Content-Type: application/json
+
+{
+  "name": "Rudy Nuyad Cana (Updated)",
+  "email": "rudy.cana.updated@gmail.com",
+  "role": "ADMIN"
+}
+
+### Delete user by ID
+@DELETE_ID = 6
+DELETE {{BASE_URL}}/users/{{DELETE_ID}}
+Accept: application/json

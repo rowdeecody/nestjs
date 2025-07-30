@@ -1,0 +1,5 @@
+? 1. Install Nest CLI
+npm install -g @nestjs/cli
+
+? 2. Create a New NestJS Project
+nest new my-nest-app

@@ -1,0 +1,17 @@
+services:
+  nestjs:
+    container_name: nestjs-app
+    build:
+      context: ./project/nestjs
+      dockerfile: ../../docker/nestjs/Dockerfile
+    volumes:
+      - ./project/nestjs:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    command: npm run start:dev
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./project/nestjs/.env
+    restart: unless-stopped
