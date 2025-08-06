@@ -7,10 +7,12 @@ docker compose --env-file .docker.env up -d
 docker exec -it nestjs-app sh
 docker exec -u node -it nestjs-app sh
 npm install -g @nestjs/cli
-npm i @nestjs/mapped-types class-validator class-transformer
+npm i @nestjs/mapped-types @nestjs/typeorm @nestjs/websockets @nestjs/platform-socket.io @nestjs/config class-validator class-transformer m typeorm pg socket.io
+
 npx nest g module users
 npx nest g service users
 npx nest g controller users
+npx nest g module features/users
 sudo chown -R rudy:rudy nestjs
 
 

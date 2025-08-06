@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CoreModules } from './core/core.modules';
-import { FeatureModules } from './features/feature.modules';
-import { GatewayModules } from './gateways/gateway.modules';
+
+import { UsersModule } from './features/users/users.module';
+import { MoviesModule } from './features/movies/movies.module';
 
 @Module({
+  // imports: [UsersModule, MoviesModule],
   imports: [
-    ...CoreModules,
-    ...FeatureModules,
-    ...GatewayModules
+
   ],
   controllers: [AppController],
   providers: [AppService],

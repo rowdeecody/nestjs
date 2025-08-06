@@ -1,4 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
 import { FindAllUserDto } from './dto/find-all-user.dto';
 import { FindOneUserDto } from './dto/find-one-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -6,6 +9,11 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
+
   private users = [
     {
       id: 1,
@@ -50,7 +58,6 @@ export class UsersService {
   }
 
   findOne(findOneUserDto: FindOneUserDto) {
-
     const { id } = findOneUserDto;
     const user = this.users.find((user) => user.id === id);
 
@@ -62,7 +69,7 @@ export class UsersService {
   }
 
   create(createUserDto: CreateUserDto) {
-    const users_by_highest_id = [...this.users.sort((a, b) => (b.id - a.id))];
+    const users_by_highest_id = [...this.users.sort((a, b) => b.id - a.id)];
     const new_user = {
       id: users_by_highest_id[0].id + 1,
       ...createUserDto,
@@ -73,11 +80,7 @@ export class UsersService {
     return new_user;
   }
 
-  update(
-    findOneUserDto: FindOneUserDto,
-    updateUserDto: UpdateUserDto
-  ) {
-
+  update(findOneUserDto: FindOneUserDto, updateUserDto: UpdateUserDto) {
     const { id } = findOneUserDto;
     this.users = this.users.map((user) => {
       if (user.id === id) {
@@ -96,7 +99,7 @@ export class UsersService {
   delete(findOneUserDto: FindOneUserDto) {
     const { id } = findOneUserDto;
     const user = this.findOne(findOneUserDto);
-    
+
     this.users = this.users.filter((user) => user.id !== id);
 
     return user;
