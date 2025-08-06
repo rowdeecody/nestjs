@@ -1,8 +1,13 @@
 git clone https://github.com/nestjs/typescript-starter.git nestjs
 docker-compose --env-file .docker.env up -d --build 
+
+docker compose --env-file .docker.env build --no-cache 
+docker compose --env-file .docker.env up -d
+
 docker exec -it nestjs-app sh
 docker exec -u node -it nestjs-app sh
 npm install -g @nestjs/cli
+npm i @nestjs/mapped-types class-validator class-transformer
 npx nest g module users
 npx nest g service users
 npx nest g controller users

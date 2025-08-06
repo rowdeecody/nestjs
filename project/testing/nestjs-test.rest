@@ -5,12 +5,12 @@ GET {{BASE_URL}}/
 Accept: application/json
 
 ### Get all users
-@role = 
+@role = ADMIN
 GET {{BASE_URL}}/users?role={{role}}
 Accept: application/json
 
 ### Get user by ID
-@GET_ID = 6
+@GET_ID = 1
 GET {{BASE_URL}}/users/{{GET_ID}}
 Accept: application/json
 
